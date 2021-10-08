@@ -147,7 +147,15 @@ close.addEventListener('click', () => {
     aside.classList.remove('details-open');
 });
 
-/* bonus
+/* TODOS
 ---
-use author_alternative_name
+- implement bookbag add/remove functionality
+- make images keyboard accessible
+- test w/ screen reader
+- fix close/fav buttons
+- update colors
+- link to openlibrary page
+- use author_alternative_name for welcome msg
+- add some more info about gorey to make it a real tribute
+- randomize the quote?
 */
