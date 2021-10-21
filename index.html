@@ -1,3 +1,32 @@
+<!-- TODOS
+---
+- make images + sidebar keyboard accessible ✅
+- same focus indicator across browsers ✅
+	- focus on sidebar when it gets shown ✅
+    - bonus: works on rounded corners ✅
+
+- make sidebar thing responsive
+- use grid
+- implement bookbag add/remove functionality
+- test w/ screen reader
+- fix close/fav buttons
+- update colors ✅
+- make it spookier!
+- add illustrations
+- why does the layout look different between chrome/firefox
+
+----
+- link to openlibrary page
+- add some more info about gorey to make it a real tribute
+- add refresh button
+- differentiate the description vs excerpt getting returned
+- use author_alternative_name for welcome msg
+- randomize the quote?
+- check for duplicate books
+- focus on next element: https://stackoverflow.com/questions/7208161/focus-next-element-in-tab-index
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,12 +49,12 @@
             <!-- covers -->
             <main></main>
             <!-- add in details panel that is triggered when album cover is clicked-->
-            <aside class="details">
+            <aside class="details" tabindex="0">
                 <h2 class="details__title"></h2>
+                <button id="favorite">Favorite</button>
                 <p class="details__pubyear"></p>
                 <p class="details__desc"></p>
-                <button id="close">Close</button>
-                <button id="favorite">Favorite</button>
+                <button id="close"><img src="/assets/close.png" alt="" aria-label="Close"></button>
             </aside>
         </div>
 

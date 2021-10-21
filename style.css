@@ -2,7 +2,15 @@
     /* color vars */
     --white: #fff;
     --gloom: #9A9A9A;
+    --vermillion: #e50000;
 }
+
+:focus {
+    /* use box-shadow so the focus indicator doesn't look janky with rounded corners */
+    box-shadow: 0 0 0 2px var(--vermillion);
+    /* fallback for Windows High Contrast mode - 'transparent' gets overriden and becomes visible */
+    outline: transparent solid 2px;
+  }
 
 @font-face {
     font-family: 'Gorey';
@@ -20,22 +28,35 @@ p {
 }
 
 main {
-    /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: stretch;
+    /* align-items: stretch; */
 
+}
+
+aside {
+    box-shadow: -1px 0px 3px rgba(0, 0, 0, 0.12), 1px 0px 3px rgba(0, 0, 0, 0.12);
 }
 
 img {
     flex-basis: 30%;
+    display: inline-block;
     width: 100%;
     margin: 10px 0 10px 0;
 }
 
 img:hover {
     opacity: 0.7;
+}
+
+button {
+    background-color: var(--white);
+    border: none;
+}
+
+button:hover {
+    color: var(--vermillion);
 }
 
 .container {
@@ -57,19 +78,31 @@ img:hover {
     top: 0;
     right: 0;
     bottom: 0;
-    max-width: 300px;
+    width: 300px;
     opacity: 0;
-    overflow-y: scroll;
-    padding: 15px 30px;
+    /* overflow-y: scroll; */
+    padding: 1rem 2rem;
     transition: all 0.35s ease-in-out;
     transform: translateX(100%);
     z-index: 1;
     background-color: var(--white);
   }
 
+  .details__pubyear {
+      font-style: italic;
+  }
+
 .details-open {
     transform: translateX(0%);
     opacity: 1;
+    
+}
+
+#close {
+    position: fixed;
+    top: 10px;
+    left: 320px;
+    width: 6%;
 }
 
 #bookbag {

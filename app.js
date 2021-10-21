@@ -26,19 +26,23 @@ const displayBooks = () => {
                 if(book.cover_i) {
                     // create book container and book cover
                     // const bookContainer = document.createElement('article')
-                    const bookCover = document.createElement('img')
+                    const bookCover = document.createElement('img');
 
                     // append book container to main
-                    main.appendChild(bookCover)
+                    main.appendChild(bookCover);
 
-                    bookCover.setAttribute('src', `http://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`)
-                    bookCover.setAttribute('alt', title)
+                    // set src to the corresponding book cover
+                    bookCover.setAttribute('src', `http://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`);
+                    // set alt to book title
+                    bookCover.setAttribute('alt', title);
+                    // make imgs tabbable
+                    bookCover.setAttribute('tabindex', 0);
 
                 // open the menu by adding an event listener to the icon
                 // when the icon is clicked, add the CSS-defined class 'menu-open' to the menu itself
                 // 'menu-open' makes the menu opaque and slides it in from the right (100% --> 0% on the x-axis)
 
-                bookCover.addEventListener('click', () => {
+                const getInfo = () => {
                     fetch(`https://openlibrary.org${book.key}.json`)
                     .then(res => res.json())
                     .then(res => {
@@ -55,23 +59,32 @@ const displayBooks = () => {
                         } else if (res.first_sentence) {
                             detailsDesc.innerText = res.first_sentence.value;
                         } else {
-                            detailsDesc.innerText = 'this work defies description'
+                            detailsDesc.innerText = 'Defies description.'
                         }
                     })
-
+                    // show side panel
                     aside.classList.add('details-open');
-                })
+                    
+                }
+
+
+            bookCover.addEventListener('keyup', (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    getInfo(); }
+
+            bookCover.addEventListener('click', getInfo);
 
                 // LOOK AT THIS https://www.kirupa.com/html5/storing_and_retrieving_an_array_from_local_storage.htm
 
-                // const getItems = () => {
+                // function getItems() {
                 //     // initialize array for bookbag
                 //     let bookbag = [];
                 //     // grab data from localStorage ("bookbag" is a div id)
                 //     let bookbagString = localStorage.getItem("bookbag");
                 //     // convert what's in localStorage to JSON
-                //     if(bookbagString !== null) {
-                //     bookbag = JSON.parse(bookbagString);
+                //     if (bookbagString !== null) {
+                //         bookbag = JSON.parse(bookbagString);
                 //     }
                 //     return bookbag;
                 // }
@@ -109,7 +122,7 @@ const displayBooks = () => {
                 //     }
                 // }
                 
-                // when the user clicks on a remove button, remove it from a new array, set the new array in localStorage and display it
+                // // when the user clicks on a remove button, remove it from a new array, set the new array in localStorage and display it
                 // const remove = () => {
                 //     let newTodos = getItems();
                 //     newTodos.splice(this.id, 1);
@@ -120,21 +133,17 @@ const displayBooks = () => {
                 // // show any existing todos first
                 // show();
 
-                // favorite.addEventListener('click', () => {
-                //     console.log(array)
-                //     add()
-
                 // // add item: trigger on click and on enter
-                // // favorite.addEventListener("keyup", function(event) {
-                // //     if (event.key === "Enter") {
-                // //         event.preventDefault();
-                // //         add();
-                // //     } else {
-                // //         favorite.addEventListener("click", add);
-                // //     }
-                // // });
+                // favorite.addEventListener("keyup", function(event) {
+                //     if (event.key === "Enter") {
+                //         event.preventDefault();
+                //         add();
+                //     } else {
+                //         favorite.addEventListener("click", add);
+                //     }
+                //  });
 
-                // })
+                })
             }
         }
     })
@@ -146,16 +155,3 @@ displayBooks()
 close.addEventListener('click', () => {
     aside.classList.remove('details-open');
 });
-
-/* TODOS
----
-- implement bookbag add/remove functionality
-- make images keyboard accessible
-- test w/ screen reader
-- fix close/fav buttons
-- update colors
-- link to openlibrary page
-- use author_alternative_name for welcome msg
-- add some more info about gorey to make it a real tribute
-- randomize the quote?
-*/
